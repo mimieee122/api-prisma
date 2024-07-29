@@ -11,16 +11,15 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         const { title, content, authorIdx } = req.body
 
         try {
-            // Create the new post
             const post = await prisma.post.create({
                 data: {
                     title,
                     content,
-                    authorIdx, // Use 'authorId' if that's the correct field in your post schema
+                    authorIdx,
                 },
             })
 
-            res.status(201).json({ status: 'success', id: post.idx }) // Ensure the response matches your schema
+            res.status(201).json({ status: 'success', id: post.idx })
         } catch (error) {
             console.error('Error creating post:', error)
             res.status(500).json({ error: 'Server Error' })
